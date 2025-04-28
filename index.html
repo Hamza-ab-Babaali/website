@@ -3,32 +3,598 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Hamza's Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .profile-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-info p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 1rem 0;
+        }
+        
+        .nav-item {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-item:hover {
+            color: #2575fc;
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background-color: #2575fc;
+            transition: width 0.3s;
+        }
+        
+        .nav-item:hover::after {
+            width: 100%;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #2575fc;
+            margin: 0.5rem auto;
+        }
+        
+        #about {
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        #about p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .skill-tag {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 180px;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 3rem;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            margin-bottom: 0.5rem;
+            color: #1a237e;
+        }
+        
+        .project-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #2575fc;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .project-btn:hover {
+            background-color: #1565c0;
+        }
+        
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            color: #333;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-link:hover {
+            color: #2575fc;
+        }
+        
+        footer {
+            background-color: #1a237e;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        footer a {
+            color: #bbdefb;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile {
+                flex-direction: column;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="container profile">
+            <img src="/api/placeholder/200/200" alt="Hamza's Profile" class="profile-image">
+            <div class="profile-info">
+                <h1>Hamza</h1>
+                <p>Software Developer & Student</p>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container nav-container">
+            <a href="#about" class="nav-item">About</a>
+            <a href="#projects" class="nav-item">Projects</a>
+            <a href="#contact" class="nav-item">Contact</a>
+        </div>
+    </nav>
+    
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <p>Hello! I'm Hamza, a passionate programmer and student. I love building projects that solve real-world problems while continuously expanding my programming knowledge.</p>
+            <p>I'm particularly interested in web development and language learning applications. My current focus is on creating tools that help people learn and practice languages more effectively.</p>
+            
+            <h3>Languages & Skills</h3>
+            <div class="skills">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">HTML</span>
+                <span class="skill-tag">CSS</span>
+                <span class="skill-tag">JavaScript</span>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">🎮</div>
+                    <div class="project-content">
+                        <h3>Number Guessing Game</h3>
+                        <p>A fun interactive game where you try to guess a randomly generated number with hints along the way.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/hamza/number-guessing-game" class="project-btn">GitHub</a>
+                            <a href="#" class="project-btn" onclick="playGuessingGame()">Demo</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">💰</div>
+                    <div class="project-content">
+                        <h3>Mini Bank Simulator</h3>
+                        <p>A simple banking application that simulates deposits, withdrawals, and displays account balance.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/hamza/mini-bank-app" class="project-btn">GitHub</a>
+                            <a href="#" class="project-btn" onclick="openBankApp()">Demo</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">🇫🇷</div>
+                    <div class="project-content">
+                        <h3>Conjuguer les Verbes</h3>
+                        <p>An interactive French verb conjugation practice tool to help language learners master French verbs.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/hamza/conjuguer-les-verbes" class="project-btn">GitHub</a>
+                            <a href="#" class="project-btn" onclick="openConjugationApp()">Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="socials">
+                <a href="https://github.com/hamza" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="mailto:hamza@example.com" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Hamza. All rights reserved.</p>
+        </div>
+    </footer>
 
-<header>
-    <div class="profile">
-        <img src="your-image.jpg" alt="Your Image" class="profile-image">
-        <div class="profile-info">
-            <h1>Your Name</h1>
-            <p>School Name</p>
+    <!-- Demo Popups -->
+    <div id="guessingGamePopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.3); z-index: 100; max-width: 400px; width: 100%; border-radius: 10px;">
+        <h3 style="margin-top: 0;">Number Guessing Game</h3>
+        <p>Guess a number between 1 and 100:</p>
+        <input type="number" id="guessInput" style="padding: 8px; width: 100%; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+        <p id="guessResult"></p>
+        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+            <button onclick="makeGuess()" style="background: #2575fc; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Guess</button>
+            <button onclick="closePopup('guessingGamePopup')" style="background: #f44336; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Close</button>
         </div>
     </div>
-</header>
 
-<section class="projects">
-    <h2>Projects</h2>
-    <ul id="project-list">
-        <!-- Add projects here -->
-        <li>
-            <h3>Project Title</h3>
-            <p>Project Description</p>
-        </li>
-        <!-- Add more projects -->
-    </ul>
-</section>
+    <div id="bankAppPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.3); z-index: 100; max-width: 400px; width: 100%; border-radius: 10px;">
+        <h3 style="margin-top: 0;">Mini Bank App</h3>
+        <p>Current Balance: $<span id="bankBalance">1000</span></p>
+        <div style="margin: 15px 0;">
+            <label for="transactionAmount">Amount:</label>
+            <input type="number" id="transactionAmount" style="padding: 8px; width: 100%; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <button onclick="deposit()" style="background: #4caf50; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; flex: 1;">Deposit</button>
+            <button onclick="withdraw()" style="background: #ff9800; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; flex: 1;">Withdraw</button>
+        </div>
+        <button onclick="closePopup('bankAppPopup')" style="background: #f44336; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; width: 100%;">Close</button>
+    </div>
 
+    <div id="conjugationAppPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; box-shadow: 0 0 20px rgba(0,0,0,0.3); z-index: 100; max-width: 500px; width: 100%; border-radius: 10px;">
+        <h3 style="margin-top: 0;">Conjuguer les Verbes</h3>
+        
+        <div style="margin: 15px 0;">
+            <p>Conjugate the verb: <strong id="currentVerb">parler</strong> (<span id="currentTense">présent</span>)</p>
+            
+            <div style="margin: 15px 0;">
+                <div style="display: flex; margin-bottom: 8px;">
+                    <span style="width: 80px;">Je</span>
+                    <input type="text" id="conj1" class="conjugation-input" style="padding: 6px; flex: 1; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="display: flex; margin-bottom: 8px;">
+                    <span style="width: 80px;">Tu</span>
+                    <input type="text" id="conj2" class="conjugation-input" style="padding: 6px; flex: 1; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="display: flex; margin-bottom: 8px;">
+                    <span style="width: 80px;">Il/Elle</span>
+                    <input type="text" id="conj3" class="conjugation-input" style="padding: 6px; flex: 1; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="display: flex; margin-bottom: 8px;">
+                    <span style="width: 80px;">Nous</span>
+                    <input type="text" id="conj4" class="conjugation-input" style="padding: 6px; flex: 1; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="display: flex; margin-bottom: 8px;">
+                    <span style="width: 80px;">Vous</span>
+                    <input type="text" id="conj5" class="conjugation-input" style="padding: 6px; flex: 1; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+                <div style="display: flex; margin-bottom: 8px;">
+                    <span style="width: 80px;">Ils/Elles</span>
+                    <input type="text" id="conj6" class="conjugation-input" style="padding: 6px; flex: 1; border: 1px solid #ddd; border-radius: 4px;">
+                </div>
+            </div>
+            
+            <p id="conjugationResult" style="min-height: 20px; color: #4caf50;"></p>
+        </div>
+        
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button onclick="checkConjugation()" style="background: #2575fc; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; flex: 1;">Check</button>
+            <button onclick="newVerb()" style="background: #9c27b0; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; flex: 1;">New Verb</button>
+            <button onclick="closePopup('conjugationAppPopup')" style="background: #f44336; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; flex: 1;">Close</button>
+        </div>
+    </div>
+
+    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99;"></div>
+
+    <script>
+        // Shared popup functions
+        function openPopup(popupId) {
+            document.getElementById(popupId).style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+        
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+        
+        // Guessing game
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+        
+        function playGuessingGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            document.getElementById('guessResult').textContent = '';
+            document.getElementById('guessInput').value = '';
+            openPopup('guessingGamePopup');
+        }
+        
+        function makeGuess() {
+            const guess = parseInt(document.getElementById('guessInput').value);
+            attempts++;
+            
+            if (isNaN(guess)) {
+                document.getElementById('guessResult').textContent = 'Please enter a valid number';
+                return;
+            }
+            
+            if (guess === secretNumber) {
+                document.getElementById('guessResult').textContent = `Congratulations! You guessed the number ${secretNumber} in ${attempts} attempts!`;
+                document.getElementById('guessResult').style.color = '#4caf50';
+            } else if (guess < secretNumber) {
+                document.getElementById('guessResult').textContent = 'Too low! Try a higher number.';
+                document.getElementById('guessResult').style.color = '#ff9800';
+            } else {
+                document.getElementById('guessResult').textContent = 'Too high! Try a lower number.';
+                document.getElementById('guessResult').style.color = '#f44336';
+            }
+        }
+        
+        // Bank app
+        let balance = 1000;
+        
+        function openBankApp() {
+            document.getElementById('bankBalance').textContent = balance;
+            openPopup('bankAppPopup');
+        }
+        
+        function deposit() {
+            const amount = parseFloat(document.getElementById('transactionAmount').value);
+            if (isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+            
+            balance += amount;
+            document.getElementById('bankBalance').textContent = balance;
+            document.getElementById('transactionAmount').value = '';
+        }
+        
+        function withdraw() {
+            const amount = parseFloat(document.getElementById('transactionAmount').value);
+            if (isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+            
+            if (amount > balance) {
+                alert('Insufficient funds!');
+                return;
+            }
+            
+            balance -= amount;
+            document.getElementById('bankBalance').textContent = balance;
+            document.getElementById('transactionAmount').value = '';
+        }
+        
+        // Conjugation app
+        const verbs = [
+            {
+                verb: 'parler',
+                present: ['parle', 'parles', 'parle', 'parlons', 'parlez', 'parlent']
+            },
+            {
+                verb: 'finir',
+                present: ['finis', 'finis', 'finit', 'finissons', 'finissez', 'finissent']
+            },
+            {
+                verb: 'être',
+                present: ['suis', 'es', 'est', 'sommes', 'êtes', 'sont']
+            },
+            {
+                verb: 'avoir',
+                present: ['ai', 'as', 'a', 'avons', 'avez', 'ont']
+            },
+            {
+                verb: 'aller',
+                present: ['vais', 'vas', 'va', 'allons', 'allez', 'vont']
+            }
+        ];
+        
+        let currentVerbIndex = 0;
+        
+        function openConjugationApp() {
+            currentVerbIndex = Math.floor(Math.random() * verbs.length);
+            displayVerb();
+            clearInputs();
+            openPopup('conjugationAppPopup');
+        }
+        
+        function displayVerb() {
+            document.getElementById('currentVerb').textContent = verbs[currentVerbIndex].verb;
+            document.getElementById('currentTense').textContent = 'présent';
+        }
+        
+        function clearInputs() {
+            const inputs = document.querySelectorAll('.conjugation-input');
+            inputs.forEach(input => {
+                input.value = '';
+                input.style.backgroundColor = '';
+            });
+            document.getElementById('conjugationResult').textContent = '';
+        }
+        
+        function newVerb() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * verbs.length);
+            } while (newIndex === currentVerbIndex);
+            
+            currentVerbIndex = newIndex;
+            displayVerb();
+            clearInputs();
+        }
+        
+        function checkConjugation() {
+            let correct = 0;
+            const currentVerb = verbs[currentVerbIndex];
+            
+            for (let i = 1; i <= 6; i++) {
+                const input = document.getElementById(`conj${i}`);
+                const correctAnswer = currentVerb.present[i-1];
+                
+                if (input.value.trim().toLowerCase() === correctAnswer) {
+                    input.style.backgroundColor = '#e8f5e9';
+                    correct++;
+                } else {
+                    input.style.backgroundColor = '#ffebee';
+                }
+            }
+            
+            if (correct === 6) {
+                document.getElementById('conjugationResult').textContent = 'Parfait! Toutes les réponses sont correctes!';
+            } else {
+                document.getElementById('conjugationResult').textContent = `${correct}/6 réponses correctes.`;
+            }
+        }
+    </script>
 </body>
 </html>
